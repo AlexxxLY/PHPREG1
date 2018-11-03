@@ -20,18 +20,21 @@ define('USERFILE', 'users.txt')
 
 if (!empty($_REQUEST['username'])) {
     $str = file_get_contents(USERFILE);
-    if (in_array($_REQUEST['username'], $str)) {
+    $arrUser = explode(",", $str);
+    if (in_array($_REQUEST['username'], $arrUser)) {
         echo 'This Name used... Please enter next name';
+        
     } else {
         file_put_contents(USERFILE, $_REQUEST['username'] . ',', FILE_APPEND);
         fclose(USERFILE);
+        var_dump($arrUser);
     }
 } else {
     echo 'Enter name please!';
 }
 
-$arrUser = explode(",", $str);
-var_dump($arrUser);
+
+
 //var_dump(implode(",",file_get_contents(USERFILE)));
 //var_dump(file_get_contents(USERFILE));
 ?>
